@@ -2,6 +2,7 @@ import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 import { z } from "zod";
 import sharp from "sharp";
+import { db } from "@/db";
 const f = createUploadthing();
 
 const auth = (req: Request) => ({ id: "fakeId" });
@@ -21,13 +22,28 @@ export const ourFileRouter = {
       const imgMetadata = await sharp(buffer).metadata();
       const { width, height } = imgMetadata;
 
-      if(!configId) {
+      if (!configId) {
         const configuration = await db.configuration.create({
-          data: height
-        })
-      }
+          data: {
+            imageUrl: file.url,
+            height: height || 500,
+            width: width || 500,
+          },
+        });
 
-      return { configId };
+        return { configId: configuration.id };
+      } else {
+        const updatedConfiguration = await db.configuration.update({
+          where: {
+            id: configId,
+          },
+          data: {
+            croppedImageUrl: file.url,
+          },
+        });
+
+        return { configId: updatedConfiguration.id };
+      }
     }),
 } satisfies FileRouter;
 
