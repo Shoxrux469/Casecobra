@@ -6,7 +6,7 @@ import { PRODUCT_PRICES } from "@/app/config/products";
 
 export const COLORS = [
   { label: "Black", value: "black", tw: "bg-zinc-900 border-zinc-900" },
-  { label: "Purple", value: "purple", tw: "bg-purple-950 border-purple-950" },
+  { label: "Blue", value: "blue", tw: "bg-blue-950 border-blue-950" },
   { label: "Rose", value: "rose", tw: "bg-rose-950 border-rose-950" },
 ] as const;
 

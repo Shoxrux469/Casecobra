@@ -409,7 +409,7 @@ const DesignConfigurator = ({
                     finish: options.finish.value,
                     material: options.material.value,
                     model: options.model.value,
-                  })  
+                  })
                 }
                 size="sm"
                 className="w-full"
