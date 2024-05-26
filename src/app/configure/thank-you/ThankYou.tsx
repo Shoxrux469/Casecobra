@@ -27,7 +27,8 @@ const ThankYou = () => {
         </div>
       </div>
     );
-  } else if (data === false) {
+  }
+  if (data === false) {
     return (
       <div className="w-full mt-24 flex justify-center">
         <div className="flex flex-col items-center gap-2">
