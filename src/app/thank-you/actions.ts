@@ -12,10 +12,7 @@ const GetPaymentStatus = async ({ orderId }: { orderId: string }) => {
   }
 
   const order = await db.order.findFirst({
-    where: {
-      id: orderId,
-      userId: user.id,
-    },
+    where: { id: orderId, userId: user.id },
     include: {
       billingAddress: true,
       configuration: true,
@@ -24,9 +21,9 @@ const GetPaymentStatus = async ({ orderId }: { orderId: string }) => {
     },
   });
 
-  if (!order) {
-    throw new Error("This order does not exist.");
-  }
+  if (!order) throw new Error("This order does not exist.");
+
+  console.log(order.isPaid);
 
   if (order.isPaid) {
     return order;
@@ -34,5 +31,4 @@ const GetPaymentStatus = async ({ orderId }: { orderId: string }) => {
     return false;
   }
 };
-
 export default GetPaymentStatus;
