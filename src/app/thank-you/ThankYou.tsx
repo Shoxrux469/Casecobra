@@ -18,6 +18,8 @@ const ThankYou = () => {
     retryDelay: 500,
   });
 
+  console.log(data);
+
   if (data === undefined) {
     return (
       <div className="w-full mt-24 flex justify-center">
@@ -41,6 +43,8 @@ const ThankYou = () => {
       </div>
     );
   }
+
+  console.log(data);
 
   const { configuration, billingAddress, shippingAddress, amount } = data;
   const { color } = configuration;
